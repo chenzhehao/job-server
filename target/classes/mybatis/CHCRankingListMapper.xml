@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czh.springboot.mapper.CHCRankingListMapper">
+
+    <select id="queryCHCCount" resultType="java.lang.Integer">
+        SELECT count(*) num FROM t_chc_answer_result where exam_id = 2002
+    </select>
+    <select id="queryCHCAll" resultType="java.util.Map">
+      SELECT case when pass_flag=1 or (pass_flag = 10 and (UNIX_TIMESTAMP(now())*1000 - start_time)/1000 > 1900) then '放弃考试：' else  (case when pass_flag=5 then '完成考试：' else '正在考试：' end ) end  tongji,count(*) num
+      FROM t_chc_answer_result WHERE exam_id = 2002 GROUP BY tongji
+    </select>
+
+    <select id="queryCHCQaunGuo" resultType="java.util.Map">
+     SELECT
+            case when LENGTH(province_name)=0 then '未知' else province_name end sheng,
+            case when pass_flag=1 or (pass_flag = 10 and (UNIX_TIMESTAMP(now())*1000 - start_time)/1000 > 1900) then '放弃考试：' else
+                    (case when pass_flag=5 then '完成考试：' else '正在考试：' end ) end tongji,
+            count(*) num
+        FROM (SELECT t.*,province_name FROM t_chc_answer_result t left join p_doctor d on t.doctor_id = d.id WHERE exam_id = 2002) a group by province_name,tongji order by province_name
+     </select>
+
+    <select id="queryCHCSheng" resultType="java.util.Map">
+        SELECT case when LENGTH(province_name)=0 then '未知' else province_name end sheng,count(1) num
+        FROM t_chc_answer_result t left join p_doctor d on t.doctor_id = d.id WHERE exam_id = 2002 GROUP BY province_name ORDER BY count(1) desc;
+    </select>
+
+    <select id="queryCHCBangdan" resultType="java.util.Map">
+
+        SELECT doctor_name,(case when sex=1 then '男' else (case when sex=2 then '女' else '未知' end) end) sex,
+        mobile_phone,correct_no,seq_no,
+        case when finish_time>1800000 then '30分' else CONCAT(FLOOR(finish_time/60000),'分',FLOOR(finish_time%60000/1000),'秒',finish_time%1000) end ctime,
+        hospital,title,
+        (case when `type`=1 then '医师' else (case when `type`=2 then '行政人员' else (case when `type`=3 then '护士' else (case when `type`=4 then '医学生' else (case when `type`=5 then '其他' else '院长' end) end) end) end) end) ctype,department,
+        (SELECT count(DISTINCT course_id) FROM p_join_course p1 WHERE p1.doctor_id = t.doctor_id ) courseNum,
+        (SELECT count(1) FROM p_certificate_log p2 WHERE p2.doctor_id = t.doctor_id) cerNum,
+        province_name,city_name,county_name,town_name
+        FROM (
+
+        SELECT doctor_id ,`name` doctor_name,correct_no,finish_time,@row_num:= @row_num+1 seq_no from
+        (
+        SELECT @row_num:= 0,r.doctor_id,d.name,d.avatar_image_url,correct_no,r.finish_time
+        FROM t_chc_answer_result r LEFT JOIN p_doctor d on r.doctor_id = d.id
+        WHERE pass_flag= 5 and exam_id = 2002
+        order by correct_no desc,finish_time asc ,name
+        ) a
+
+        ) t left join p_doctor p on p.id = t.doctor_id
+        WHERE seq_no &lt;=2000 ORDER BY seq_no
+    </select>
+
+</mapper>
