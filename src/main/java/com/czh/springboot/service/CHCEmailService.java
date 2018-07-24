@@ -4,6 +4,7 @@ import com.czh.springboot.mapper.CHCRankingListMapper;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -25,6 +26,10 @@ public class CHCEmailService {
     private JavaMailSender mailSender;
     @Autowired
     Configuration configuration; // freeMarker configuration
+
+//    @Value("${username}")
+    @Value("${config.value.test.job}")
+    private String catj;
 
     @Autowired
     CHCRankingListMapper rankingListMapper;
