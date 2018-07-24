@@ -27,10 +27,6 @@ public class CHCEmailService {
     @Autowired
     Configuration configuration; // freeMarker configuration
 
-//    @Value("${username}")
-    @Value("${config.value.test.job}")
-    private String catj;
-
     @Autowired
     CHCRankingListMapper rankingListMapper;
 
