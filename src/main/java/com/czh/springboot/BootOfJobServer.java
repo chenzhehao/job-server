@@ -17,9 +17,17 @@ import javax.mail.MessagingException;
 @SpringBootApplication(scanBasePackages = "com.czh.springboot")
 @MapperScan("com.czh.springboot.mapper")
 @EnableDiscoveryClient
-public class Boot {
+public class BootOfJobServer {
     public static void main(String[] args) {
-        SpringApplication.run(Boot.class, args);
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("windows")) {
+            System.setProperty("log.path", "D:/chenzhehao/workspace/czh");
+        } else {
+            System.setProperty("log.path", "/opt");
+        }
+        System.setProperty("context.name", "job-server");
+
+        SpringApplication.run(BootOfJobServer.class, args);
     }
 
     @Autowired
