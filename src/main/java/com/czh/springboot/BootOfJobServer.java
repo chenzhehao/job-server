@@ -35,12 +35,12 @@ public class BootOfJobServer {
 
     @RequestMapping("test")
     public String test() {
-        try {
-            emailService.CHCSendEmail();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        return "asdf";
+//        try {
+//            emailService.CHCSendEmail();
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
+        return "job test success";
     }
 
 }
