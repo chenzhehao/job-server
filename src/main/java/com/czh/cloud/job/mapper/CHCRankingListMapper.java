@@ -1,4 +1,4 @@
-package com.czh.springboot.mapper;
+package com.czh.cloud.job.mapper;
 
 import java.util.List;
 import java.util.Map;

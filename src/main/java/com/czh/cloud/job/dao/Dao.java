@@ -1,4 +1,4 @@
-package com.czh.springboot.dao;
+package com.czh.cloud.job.dao;
 
 public class Dao{
     public String sayHi(){

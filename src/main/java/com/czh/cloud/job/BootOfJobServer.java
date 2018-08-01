@@ -1,6 +1,6 @@
-package com.czh.springboot;
+package com.czh.cloud.job;
 
-import com.czh.springboot.service.CHCEmailService;
+import com.czh.cloud.job.service.CHCEmailService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -10,12 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.mail.MessagingException;
-
 @RestController
 @EnableScheduling//增加支持定时任务的注解
-@SpringBootApplication(scanBasePackages = "com.czh.springboot")
-@MapperScan("com.czh.springboot.mapper")
+@SpringBootApplication(scanBasePackages = "com.czh.cloud")
+@MapperScan("com.czh.cloud.job.mapper")
 @EnableDiscoveryClient
 public class BootOfJobServer {
     public static void main(String[] args) {

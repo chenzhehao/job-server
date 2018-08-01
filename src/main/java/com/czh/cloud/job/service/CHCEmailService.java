@@ -1,10 +1,9 @@
-package com.czh.springboot.service;
+package com.czh.cloud.job.service;
 
-import com.czh.springboot.mapper.CHCRankingListMapper;
+import com.czh.cloud.job.mapper.CHCRankingListMapper;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

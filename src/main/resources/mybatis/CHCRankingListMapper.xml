@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.czh.springboot.mapper.CHCRankingListMapper">
+<mapper namespace="com.czh.cloud.job.mapper.CHCRankingListMapper">
 
     <select id="queryCHCCount" resultType="java.lang.Integer">
         SELECT count(*) num FROM t_chc_answer_result where exam_id = 2002
