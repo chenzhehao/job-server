@@ -14,13 +14,6 @@
     </parent>
 
     <dependencies>
-        <!-- 注册到eureka jar begin -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!-- 注册到eureka jar end -->
-
         <!-- 邮件功能引入jar包 begin -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
