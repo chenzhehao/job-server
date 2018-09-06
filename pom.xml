@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.czh.springcloud.root</groupId>
+        <groupId>com.czh.cloud.root</groupId>
         <artifactId>root-server</artifactId>
         <version>1.0.0</version>
         <relativePath>../root-server/pom.xml</relativePath>
